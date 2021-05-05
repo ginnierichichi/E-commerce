@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Laravel\Cashier\Cashier;
 
 class CartController extends Controller
 {
@@ -19,6 +20,7 @@ class CartController extends Controller
      */
     public function index()
     {
+//        dd(Cashier::formatAmount(5000, 'gbp'));
         return view('products.index');
     }
 

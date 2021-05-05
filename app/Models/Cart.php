@@ -13,7 +13,7 @@ class Cart extends Model
 
     public function scopeBySession()
     {
-        return $this->where('session_id', session()->getId());
+        return $this->where('session_id', session()->getId())->latest();
     }
 
     public function total()

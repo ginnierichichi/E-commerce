@@ -13,23 +13,23 @@
                        @foreach($cart->products as $product)
                            <div class="mb-4 pb-4 border-b">
                                <div>{{ $product->title }}</div>
-                               <div>{{ $product->price }}</div>
-                               <form action="">
-                                   <button>remove</button>
-                               </form>
+                               <div>@money($product->price)</div>
+                              <div>
+                                  <form action="{{ route('products.destroy', $product) }}" method="post">
+                                      @csrf
+                                      @method('DELETE')
+                                      <button>remove</button>
+                                  </form>
+                              </div>
                            </div>
                         @endforeach
 
                         <div class="mt-4">
-                            <div>Cart Total: £{{ $cart->total() }}</div>
+                            <div>Cart Total: @money($cart->total())</div>
                         </div>
 
-                        <div>
-                            <form action="{{ route('products.destroy', $product) }}" method="post">
-                                @csrf
-                                @method('DELETE')
-                                <button>CHECK OUT</button>
-                            </form>
+                        <div class="mt-4">
+                            <a href="{{ route('checkout.index') }}" class="bg-green-500 rounded-lg shadow-lg px-4 py-2 text-gray-100 font-bold tracking-wider">CHECK OUT</a>
                         </div>
                     @else
                         <p>Your cart  is empty</p>

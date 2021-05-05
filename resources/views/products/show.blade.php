@@ -17,7 +17,7 @@
                     </div>
                     <div class="mt-10">
                         <div class="text-2xl">
-                           £ {{ $product->price }}
+                            @money($product->price)
                         </div>
                         <div class="mt-8">
                             <span>Description</span>

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Product;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Laravel\Cashier\Cashier;
 
 class CartProductsController extends Controller
 {
@@ -33,10 +35,12 @@ class CartProductsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function store(Request $request)
     {
+//        dd(Cashier::formatAmount(5000, 'gbp'));
+
         $product = Product::findOrFail($request->product_id);
 
         $cart = Cart::firstorCreate([
@@ -87,9 +91,9 @@ class CartProductsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Product $product
-     * @return Response
+     * @return RedirectResponse
      */
-    public function destroy(Product $product): Response
+    public function destroy(Product $product): RedirectResponse
     {
         $cart = Cart::bySession()->first()->products()->detach($product);
 
