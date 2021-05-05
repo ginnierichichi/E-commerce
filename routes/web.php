@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CartProductsController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +18,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', HomeController::class)->name('home');
+
+Route::get('/products/{product:slug}', [ProductsController::class, 'show'])->name('products.show');
+Route::post('/cart/products', [CartProductsController::class, 'store'])->name('products.store');
+Route::delete('/cart/products/{product:slug}', [CartProductsController::class, 'destroy'])->name('products.destroy');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
 //Route::get('/dashboard', function () {
 //    return view('dashboard');
