@@ -12,19 +12,26 @@
                     @if(optional(optional($cart)->products)->count())
                        @foreach($cart->products as $product)
                            <div class="mb-4 pb-4 border-b">
-                               <div>{{ $product->title }}</div>
-                               <div>@money($product->price)</div>
-                              <div>
-                                  <form action="{{ route('products.destroy', $product) }}" method="post">
-                                      @csrf
-                                      @method('DELETE')
-                                      <button>remove</button>
-                                  </form>
-                              </div>
+                               <div class="flex items-baseline justify-between ">
+                                   <div class="flex items-center space-x-4">
+                                       <img src="{{ asset('images/'.$product->image) }}" alt="" width="120px">
+                                       <div>
+                                           <div>{{ $product->title }}</div>
+                                           <div>@money($product->price)</div>
+                                       </div>
+                                   </div>
+                                  <div>
+                                      <form action="{{ route('products.destroy', $product) }}" method="post">
+                                          @csrf
+                                          @method('DELETE')
+                                          <button>remove</button>
+                                      </form>
+                                  </div>
+                               </div>
                            </div>
                         @endforeach
 
-                        <div class="mt-4">
+                        <div class="mt-4 flex justify-end">
                             <div>Cart Total: @money($cart->total())</div>
                         </div>
 

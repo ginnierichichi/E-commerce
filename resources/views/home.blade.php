@@ -12,7 +12,11 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <a href="{{ route('products.show', $product) }}">
                         <div class="p-6 bg-white">
-                            <div class="mb-4 text-lg">
+                            <div>
+                                <img src="{{asset('images/'.$product->image)}}" alt="">
+                            </div>
+
+                            <div class="mb-4 mt-2 text-lg">
                                 {{ $product->title }}
                             </div>
 

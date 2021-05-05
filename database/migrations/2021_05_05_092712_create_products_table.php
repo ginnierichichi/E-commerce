@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('description');
+            $table->string('image');
             $table->integer('price');
             $table->string('stripe_id');
             $table->string('file_path');
