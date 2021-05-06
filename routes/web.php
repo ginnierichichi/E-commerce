@@ -4,7 +4,9 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CartProductsController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\WebhookController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +27,8 @@ Route::post('/cart/products', [CartProductsController::class, 'store'])->name('p
 Route::delete('/cart/products/{product:slug}', [CartProductsController::class, 'destroy'])->name('products.destroy');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+Route::post('/stripe/webhook', [WebhookController::class, 'handleWebhook']);
 
 //Route::get('/dashboard', function () {
 //    return view('dashboard');

@@ -34,18 +34,16 @@ class CartProductsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return RedirectResponse
      */
     public function store(Request $request)
     {
-//        dd(Cashier::formatAmount(5000, 'gbp'));
-
         $product = Product::findOrFail($request->product_id);
 
-        $cart = Cart::firstorCreate([
-            'user_id' => auth()->id(), //can be nullable
-            'session_id' => session()->getId(),
+        $cart = Cart::firstOrCreate([
+            'user_id' => auth()->id(),
+            'session_id' => session()->getId()
         ]);
 
         $cart->products()->syncWithoutDetaching($product);
@@ -78,7 +76,7 @@ class CartProductsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  \App\Models\Cart  $cart
      * @return Response
      */
@@ -93,7 +91,7 @@ class CartProductsController extends Controller
      * @param Product $product
      * @return RedirectResponse
      */
-    public function destroy(Product $product): RedirectResponse
+    public function destroy(Product $product)
     {
         $cart = Cart::bySession()->first()->products()->detach($product);
 

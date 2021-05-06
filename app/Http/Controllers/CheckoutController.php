@@ -17,12 +17,12 @@ class CheckoutController extends Controller
         $cart = Cart::bySession()->first();
 
         $checkout = $request->user()->checkout($cart->products->pluck('stripe_id')->toArray(), [
-//            'success_url' => '',
+            'success_url' => route('orders.index'),
             'cancel_url' => route('cart.index'),
         ]);
 
         return view('checkout.index', [
-            'checkout' => $checkout,
+            'checkout' => $checkout
         ]);
     }
 }
